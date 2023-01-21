@@ -12,6 +12,8 @@ namespace {
 Board::Board(Scene* sc)
 	:Object(sc)
 	,board()
+	,mouseIndex()
+	,onBoard{false}
 {}
 
 Board::~Board(){
@@ -33,6 +35,22 @@ void Board::Init(){
 }
 
 void Board::Update(){
+	Vec2 mousePosition;
+	GetMousePoint(&mousePosition.x,&mousePosition.y);
+	mouseIndex = (mousePosition - Vec2{ BOARD_X,BOARD_Y }) / Vec2{ BlockSize,BlockSize };
+
+
+
+	// confirming mouse on the board 
+	bool left = mousePosition.x >= BOARD_X;
+	bool up	  = mousePosition.y >= BOARD_Y;
+	bool right= mousePosition.x <= BOARD_X + WIDTH  * BlockSize ;
+	bool down = mousePosition.y <= BOARD_Y + HEIGHT * BlockSize ;
+
+	onBoard = left && up && right && down;
+
+
+
 
 }
 
@@ -45,6 +63,16 @@ void Board::Draw() {
 			int posx = x * BlockSize + BOARD_X;
 			int posy = y * BlockSize + BOARD_Y;
 			DrawBox(posx,posy,posx+BlockSize,posy+BlockSize,  0x808080, !block.isOpen);
+	// disp blocks frame
+			DrawBox(posx,posy,posx+BlockSize,posy+BlockSize,  0x808080/2, FALSE);
+			
+	// disp mouse frame 
+			if (onBoard && y == mouseIndex.y && x == mouseIndex.x) {
+					posx = mouseIndex.x * BlockSize + BOARD_X;
+					posy = mouseIndex.y * BlockSize + BOARD_Y;
+					DrawBox(posx, posy, posx + BlockSize, posy + BlockSize, 0xffffff, FALSE);
+			}
+
 			
 			// disp a block
 			//DrawBox(posx,posy,posx+BlockSize,posy+BlockSize,  GetColor(100,(y*WIDTH+x)*25 % 255, 100), !block.isOpen);
