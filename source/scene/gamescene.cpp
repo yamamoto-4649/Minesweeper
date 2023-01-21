@@ -3,13 +3,13 @@
 #include<DxLib.h>
 #include"../libs/frameWork/scenemanager.h"
 #include"../object/gameSceneObject.h"
-
+#include"../object/board.h"
 
 GameScene::GameScene(){
 	SetBackgroundColor(0xe5,0xff,0xff);
 
 	Create<GameSceneObject>("gameSceneObject");
-
+	Create<Board>("board");
 }
 
 GameScene::~GameScene(){
