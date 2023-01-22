@@ -54,17 +54,26 @@ void Board::Update(){
 
 	onBoard = left && up && right && down;
 
-	//change flag active
+
+	//mouse click
 	if (onBoard) {
-		bool mouseLeft = GetMouseInput() & MOUSE_INPUT_RIGHT;
-		if (mouseLeft && !keystop) {
+	//change flag active
+		bool mouseRight = GetMouseInput() & MOUSE_INPUT_RIGHT;
+		if (mouseRight && !keystop) {
 			int index = mouseIndex.y * WIDTH + mouseIndex.x;
 			board.at(index).flag = !board.at(index).flag;
 		}
-		keystop = mouseLeft;
+
+
+	// block open
+		bool mouseLeft = GetMouseInput() & MOUSE_INPUT_LEFT;
+		if (mouseLeft && !keystop) {
+			int index = mouseIndex.y * WIDTH + mouseIndex.x;
+			board.at(index).isOpen= !board.at(index).flag && !board.at(index).isOpen;
+		}
+
+		keystop = mouseRight || mouseLeft;
 	}
-
-
 }
 
 void Board::Draw() {
