@@ -14,7 +14,7 @@ Board::Board(Scene* sc)
 	:Object(sc)
 	,board()
 	,mouseIndex()
-	,firstClick{true}
+	,firstClick{false}
 	,onBoard{false}
 	,keystop{false}
 {}
@@ -27,6 +27,7 @@ void Board::Init(){
 	Block firstInitValue = {0,false,false};
 	board.resize(WIDTH * HEIGHT, firstInitValue);
 	keystop = true;
+	firstClick = true;
 	
 	// rand reset to bomb
 	/*for(Block& aBlock:board){
@@ -57,6 +58,8 @@ void Board::Update(){
 		board.clear();
 		Block firstInitValue = { 0,false,false };
 		board.resize(WIDTH * HEIGHT, firstInitValue);
+		firstClick = true;
+		keystop = true;
 
 		BombShuffle();
 
