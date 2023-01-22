@@ -1,5 +1,4 @@
 #include "board.h"
-#include<algorithm>
 #include<random>
 
 namespace {
@@ -34,7 +33,7 @@ void Board::Init(){
 		aBlock.bomb = haveBomb;
 	}*/
 
-	//bomb shuffle 
+	// bomb shuffle 
 	BombShuffle();
 
 }
@@ -55,13 +54,15 @@ void Board::Update(){
 	onBoard = left && up && right && down;
 
 
-	//mouse click
+	// mouse click
 	if (onBoard) {
-	//change flag active
+	// change flag active
 		bool mouseRight = GetMouseInput() & MOUSE_INPUT_RIGHT;
 		if (mouseRight && !keystop) {
 			int index = mouseIndex.y * WIDTH + mouseIndex.x;
-			board.at(index).flag = !board.at(index).flag;
+			// isn't open 
+			if( !board.at(index).isOpen)
+				board.at(index).flag = !board.at(index).flag;
 		}
 
 
@@ -69,7 +70,9 @@ void Board::Update(){
 		bool mouseLeft = GetMouseInput() & MOUSE_INPUT_LEFT;
 		if (mouseLeft && !keystop) {
 			int index = mouseIndex.y * WIDTH + mouseIndex.x;
-			board.at(index).isOpen= !board.at(index).flag && !board.at(index).isOpen;
+			// open true is skip
+			if(!board.at(index).flag && !board.at(index).isOpen)
+				board.at(index).isOpen= true;
 		}
 
 		keystop = mouseRight || mouseLeft;
@@ -97,7 +100,7 @@ void Board::Draw() {
 				int mousePosY = mouseIndex.y * BLOCK_SIZE + BOARD_Y;
 				DrawBox(mousePosX, mousePosY, mousePosX + BLOCK_SIZE, mousePosY + BLOCK_SIZE, 0xffffff, FALSE);
 			}
-	//disp bomb
+	// disp bomb
 			if (block.bomb)
 				DrawCircle(posx+BLOCK_SIZE/2,posy+BLOCK_SIZE/2,BLOCK_SIZE/2,0x222222,TRUE);
 			if (block.flag)
@@ -111,5 +114,6 @@ void Board::BombShuffle(){
 		board.at(i).bomb = true;
 	}
 
-	std::shuffle(board.begin(),board.end(), std::default_random_engine());
+ 	//std::shuffle(board.begin(),board.end(), std::default_random_engine());
+ 	std::random_shuffle(board.begin(),board.end());
 }
