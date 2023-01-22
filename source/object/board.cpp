@@ -2,12 +2,12 @@
 #include<random>
 
 namespace {
-	static const int WIDTH = 4;// is board width _ num x
-	static const int HEIGHT = 4;// is board height _ num y
+	static const int WIDTH = 9;// is board width _ num x
+	static const int HEIGHT = 9;// is board height _ num y
 	static const int BOARD_X = 100;// first position _ x
 	static const int BOARD_Y = 100;// first position _ y
-	static const int BLOCK_SIZE = 64;// all block size _ width and height
-	static const int BOMB_MAX = 4;// first bomb count
+	static const int BLOCK_SIZE = 48;// all block size _ width and height
+	static const int BOMB_MAX = 10;// first bomb count
 }
 
 Board::Board(Scene* sc)
@@ -51,7 +51,21 @@ void Board::Update(){
 	GetMousePoint(&mousePosition.x,&mousePosition.y);
 	mouseIndex = (mousePosition - Vec2{ BOARD_X,BOARD_Y }) / Vec2{ BLOCK_SIZE,BLOCK_SIZE };
 
+#ifdef _DEBUG
+	//reset 
+	if (CheckHitKey(KEY_INPUT_R)) {
+		board.clear();
+		Block firstInitValue = { 0,false,false };
+		board.resize(WIDTH * HEIGHT, firstInitValue);
 
+		BombShuffle();
+
+		for (int i = 0; i < board.size(); i++) {
+			int bombNum = CountBombAroundBlock(i);
+			board.at(i).nuber = bombNum;
+		}
+	}
+#endif
 
 	// confirming mouse on the board 
 	bool left = mousePosition.x >= BOARD_X;
@@ -123,8 +137,9 @@ void Board::Draw() {
 				DrawBox(mousePosX, mousePosY, mousePosX + BLOCK_SIZE, mousePosY + BLOCK_SIZE, 0xffffff, FALSE);
 			}
 	// disp bomb
-			if (block.bomb)
+			if (block.bomb && block.isOpen)
 				DrawCircle(posx+BLOCK_SIZE/2,posy+BLOCK_SIZE/2,BLOCK_SIZE/2,0x222222,TRUE);
+	//disp flag
 			if (block.flag)
 				DrawTriangle(posx+BLOCK_SIZE/2,posy,posx,posy+BLOCK_SIZE,posx+BLOCK_SIZE,posy+BLOCK_SIZE,0xffff00,FALSE);
 	// disp bomb count

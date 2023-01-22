@@ -8,7 +8,7 @@
 GameScene::GameScene(){
 	SetBackgroundColor(0xe5,0xff,0xff);
 
-	Create<GameSceneObject>("gameSceneObject");
+	//Create<GameSceneObject>("gameSceneObject");
 	Create<Board>("board");
 }
 
