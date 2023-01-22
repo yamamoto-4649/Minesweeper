@@ -13,12 +13,14 @@ private:
 	struct Block {
 		int nuber;
 		bool bomb;
+		bool flag;
 		bool isOpen;
 	};
 
 	std::vector<Block>board;
 	Vec2 mouseIndex;
 	bool onBoard;
+	bool keystop;
 
 	void BombShuffle();
 };

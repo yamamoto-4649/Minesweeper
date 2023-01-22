@@ -16,6 +16,7 @@ Board::Board(Scene* sc)
 	,board()
 	,mouseIndex()
 	,onBoard{false}
+	,keystop{false}
 {}
 
 Board::~Board(){
@@ -25,6 +26,7 @@ Board::~Board(){
 void Board::Init(){
 	Block firstInitValue = {0,false,false};
 	board.resize(WIDTH * HEIGHT, firstInitValue);
+	keystop = true;
 	
 	// rand reset to bomb
 	/*for(Block& aBlock:board){
@@ -52,7 +54,15 @@ void Board::Update(){
 
 	onBoard = left && up && right && down;
 
-
+	//change flag active
+	if (onBoard) {
+		bool mouseLeft = GetMouseInput() & MOUSE_INPUT_RIGHT;
+		if (mouseLeft && !keystop) {
+			int index = mouseIndex.y * WIDTH + mouseIndex.x;
+			board.at(index).flag = !board.at(index).flag;
+		}
+		keystop = mouseLeft;
+	}
 
 
 }
@@ -81,7 +91,8 @@ void Board::Draw() {
 	//disp bomb
 			if (block.bomb)
 				DrawCircle(posx+BLOCK_SIZE/2,posy+BLOCK_SIZE/2,BLOCK_SIZE/2,0x222222,TRUE);
-			
+			if (block.flag)
+				DrawTriangle(posx+BLOCK_SIZE/2,posy,posx,posy+BLOCK_SIZE,posx+BLOCK_SIZE,posy+BLOCK_SIZE,0xffff00,FALSE);
 		}
 	}
 }
