@@ -14,6 +14,7 @@ Board::Board(Scene* sc)
 	:Object(sc)
 	,board()
 	,mouseIndex()
+	,firstClick{true}
 	,onBoard{false}
 	,keystop{false}
 {}
@@ -62,32 +63,42 @@ void Board::Update(){
 
 
 	// mouse click
-	if (onBoard) {
+	
 	// change flag active
-		bool mouseRight = GetMouseInput() & MOUSE_INPUT_RIGHT;
-		if (mouseRight && !keystop) {
+	bool mouseRight = GetMouseInput() & MOUSE_INPUT_RIGHT;
+	if (mouseRight && !keystop) {
+
+		if (onBoard) {
 			int index = mouseIndex.y * WIDTH + mouseIndex.x;
 			// isn't open 
-			if( !board.at(index).isOpen)
+			if (!board.at(index).isOpen)
 				board.at(index).flag = !board.at(index).flag;
 		}
-
+	}
 
 	// block open
-		bool mouseLeft = GetMouseInput() & MOUSE_INPUT_LEFT;
-		if (mouseLeft && !keystop) {
+	bool mouseLeft = GetMouseInput() & MOUSE_INPUT_LEFT;
+	if (mouseLeft && !keystop) {
+
+		if (onBoard) {
 			int index = mouseIndex.y * WIDTH + mouseIndex.x;
 			// open true is skip
 			if (!board.at(index).flag && !board.at(index).isOpen) {
-				board.at(index).isOpen= true;
+				board.at(index).isOpen = true;
+
+				// firstClick Or click block is bomb zero 
+				if (firstClick || CountBombAroundBlock(index)==0) {
 
 				// open chain
 				OpenAroundEmptyBlock(index);
+				}
+				
+				firstClick = false;
 			}
 		}
-
-		keystop = mouseRight || mouseLeft;
 	}
+	keystop = mouseRight || mouseLeft;
+
 }
 
 void Board::Draw() {
@@ -128,7 +139,7 @@ void Board::BombShuffle(){
 		board.at(i).bomb = true;
 	}
 
- 	std::random_shuffle(board.begin(),board.end());
+ 	std::random_shuffle(board.begin(),board.end(), [&](int i) {return GetRand(100)%i;});
 }
 
 const int Board::CountBombAroundBlock(int index){
