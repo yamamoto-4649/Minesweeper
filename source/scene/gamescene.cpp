@@ -42,7 +42,7 @@ void GameScene::Draw() {
 
 	
 #ifdef _DEBUG 
-	DrawFormatString(100,100,0x0,"GameScene\nEscape‚Å–ß‚é");
+	//DrawFormatString(100,100,0x0,"GameScene\nEscape‚Å–ß‚é");
 #endif
 
 }

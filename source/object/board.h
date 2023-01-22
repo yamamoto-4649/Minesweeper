@@ -22,5 +22,16 @@ private:
 	bool onBoard;
 	bool keystop;
 
+	/// <summary>
+	/// <para>BOMB_MAXの数だけ爆弾を追加し</para>
+	/// <para>boardの中身を混ぜる		  </para>
+	/// </summary>
 	void BombShuffle();
+	/// <summary>
+	/// <para>指定した要素の周りにある爆弾の個数を返す</para>
+	/// <para>ボムや範囲外ならー１を返す</para>
+	/// </summary>
+	/// <param name="index">指定</param>
+	/// <returns></returns>
+	const int CountBombAroundBlock(int index);
 };

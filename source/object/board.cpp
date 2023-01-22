@@ -36,6 +36,13 @@ void Board::Init(){
 	// bomb shuffle 
 	BombShuffle();
 
+	// count bomb around block
+	for (int i = 0; i < board.size(); i++) {
+		int bombNum= CountBombAroundBlock(i);
+		board.at(i).nuber = bombNum;
+	}
+
+
 }
 
 void Board::Update(){
@@ -105,6 +112,9 @@ void Board::Draw() {
 				DrawCircle(posx+BLOCK_SIZE/2,posy+BLOCK_SIZE/2,BLOCK_SIZE/2,0x222222,TRUE);
 			if (block.flag)
 				DrawTriangle(posx+BLOCK_SIZE/2,posy,posx,posy+BLOCK_SIZE,posx+BLOCK_SIZE,posy+BLOCK_SIZE,0xffff00,FALSE);
+	// disp bomb count
+			if(block.isOpen)
+			DrawFormatString(posx,posy,0x0,"%d",block.nuber);
 		}
 	}
 }
@@ -114,6 +124,45 @@ void Board::BombShuffle(){
 		board.at(i).bomb = true;
 	}
 
- 	//std::shuffle(board.begin(),board.end(), std::default_random_engine());
  	std::random_shuffle(board.begin(),board.end());
+}
+
+const int Board::CountBombAroundBlock(int index){
+
+	// num out index
+	if (index < 0 || board.size() <= index)
+		return -1;
+
+	// bomb is skip
+	if (board.at(index).bomb)
+		return -1;
+
+	int bombCount = 0;
+	for (int y = -1; y <= 1; y++) {
+		for (int x = -1; x <= 1; x++) {
+			int indexX= index% WIDTH;
+			int indexY= index/ WIDTH;
+
+			int aroundX= indexX+ x;
+			int aroundY= indexY+ y;
+
+			if  (
+					aroundX < 0
+				 || aroundY < 0
+				 || WIDTH <= aroundX
+				 || HEIGHT <= aroundY
+				)
+				continue;
+	
+			int aroundIndex = aroundY* WIDTH+ aroundX;
+
+
+			if ( !board.at(aroundIndex).bomb)
+				continue;
+
+			bombCount++;
+		}
+	}
+
+	return bombCount;
 }
