@@ -19,4 +19,6 @@ private:
 	std::vector<Block>board;
 	Vec2 mouseIndex;
 	bool onBoard;
+
+	void BombShuffle();
 };
