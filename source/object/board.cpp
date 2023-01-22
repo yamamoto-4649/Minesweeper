@@ -78,8 +78,12 @@ void Board::Update(){
 		if (mouseLeft && !keystop) {
 			int index = mouseIndex.y * WIDTH + mouseIndex.x;
 			// open true is skip
-			if(!board.at(index).flag && !board.at(index).isOpen)
+			if (!board.at(index).flag && !board.at(index).isOpen) {
 				board.at(index).isOpen= true;
+
+				// open chain
+				OpenAroundEmptyBlock(index);
+			}
 		}
 
 		keystop = mouseRight || mouseLeft;
@@ -165,4 +169,36 @@ const int Board::CountBombAroundBlock(int index){
 	}
 
 	return bombCount;
+}
+
+void Board::OpenAroundEmptyBlock(int index) {
+	if (index < 0 || board.size() <= index)
+		return;
+
+	for (int y = -1; y <= 1; y++) {
+		for (int x = -1; x <= 1; x++) {
+			int aroundX = (index % WIDTH) + x;
+			int aroundY = (index / WIDTH) + y;
+
+			if (aroundX < 0
+				|| aroundY < 0
+				|| aroundX >= WIDTH
+				|| aroundY >= HEIGHT
+				)
+				continue;
+
+			int aroundIndex = aroundY * WIDTH + aroundX;
+			if (board.at(aroundIndex).bomb)
+				continue;
+			if (board.at(aroundIndex).isOpen)
+				continue;
+
+			board.at(aroundIndex).isOpen = true;
+
+	// chain
+			if(board.at(aroundIndex).nuber==0)
+				OpenAroundEmptyBlock(aroundIndex);
+		}
+	}
+
 }
