@@ -39,10 +39,7 @@ void Board::Init(){
 	BombShuffle();
 
 	// count bomb around block
-	for (int i = 0; i < board.size(); i++) {
-		int bombNum= CountBombAroundBlock(i);
-		board.at(i).nuber = bombNum;
-	}
+	CountBombAroundBlockAll();
 
 
 }
@@ -104,13 +101,48 @@ void Board::Update(){
 				board.at(index).isOpen = true;
 
 				// firstClick Or click block is bomb zero 
-				if (firstClick || CountBombAroundBlock(index)==0) {
+				
+				if (!firstClick&& CountBombAroundBlock(index) == 0) {
 
-				// open chain
-				OpenAroundEmptyBlock(index);
+					// open chain
+					OpenAroundEmptyBlock(index);
+				}
+				if (firstClick) {
+				//first delete bomb
+					{
+					board.at(index).bomb = false;
+					struct EmptyBlock {
+						Block aBlock;
+						int oldNumber;
+					};
+					std::vector<EmptyBlock>emptyBlock;
+
+					emptyBlock.reserve(board.size());
+					for (int i = 0; i < board.size(); i++) {
+						if (board.at(i).bomb)
+							continue;
+						if (i == index)
+							continue;
+						EmptyBlock send;
+						send.aBlock = board.at(i);
+						send.oldNumber = i;
+						emptyBlock.emplace_back(send);
+
+					}
+
+					int bombNum = GetRand(emptyBlock.size() - 1);
+					int oldBomb= emptyBlock.at(bombNum).oldNumber;
+					board.at(oldBomb).bomb = true;
+					CountBombAroundBlockAll();
+					}
+
+
+
+					OpenAroundEmptyBlock(index);
+					firstClick = false;
 				}
 				
-				firstClick = false;
+				
 			}
 		}
 	}
@@ -202,6 +234,14 @@ const int Board::CountBombAroundBlock(int index){
 	}
 
 	return bombCount;
+}
+
+void Board::CountBombAroundBlockAll(){
+	// count bomb around block
+	for (int i = 0; i < board.size(); i++) {
+		int bombNum = CountBombAroundBlock(i);
+		board.at(i).nuber = bombNum;
+	}
 }
 
 void Board::OpenAroundEmptyBlock(int index) {

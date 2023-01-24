@@ -35,6 +35,8 @@ private:
 	/// <param name="index">指定</param>
 	/// <returns></returns>
 	const int CountBombAroundBlock(int index);
+	// 全ブロック周囲の爆弾を数える count bomb around block
+	void CountBombAroundBlockAll();
 
 	/// <summary>
 	/// 指定した周りの爆弾じゃないブロックを連鎖して開ける
