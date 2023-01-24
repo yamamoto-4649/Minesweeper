@@ -1,6 +1,7 @@
 #pragma once
 #include"../libs/frameWork/component.h"
 #include<unordered_map>
+#include<string>
 
 class Sound :public Component {
 public:
