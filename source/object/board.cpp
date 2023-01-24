@@ -1,5 +1,8 @@
 #include "board.h"
+
+#include"../libs/frameWork/scene.h"
 #include<random>
+#include"gameClear.h"
 
 namespace {
 	static const int WIDTH = 9;// is board width _ num x
@@ -67,6 +70,11 @@ void Board::Update(){
 			int bombNum = CountBombAroundBlock(i);
 			board.at(i).nuber = bombNum;
 		}
+
+		auto gamecP = GetScene()->Invoke<GameClear>();
+		if (gamecP) {
+			gamecP->ResetClear();
+		}
 	}
 #endif
 
@@ -130,8 +138,8 @@ void Board::Update(){
 						send.aBlock = board.at(i);
 						send.oldNumber = i;
 						emptyBlock.emplace_back(send);
-
 					}
+					emptyBlock.shrink_to_fit();
 
 					int bombNum = GetRand(emptyBlock.size() - 1);
 					int oldBomb= emptyBlock.at(bombNum).oldNumber;
@@ -151,6 +159,7 @@ void Board::Update(){
 	}
 	keystop = mouseRight || mouseLeft;
 
+	CheckGameClear();
 }
 
 void Board::Draw() {
@@ -188,8 +197,9 @@ void Board::Draw() {
 			if (block.flag)
 				DrawTriangle(posx+BLOCK_SIZE/2,posy,posx,posy+BLOCK_SIZE,posx+BLOCK_SIZE,posy+BLOCK_SIZE,0xffff00,FALSE);
 	// disp bomb count
-			if (block.isOpen) {
-				DrawFormatStringToHandle(posx, posy, 0x0,hFont, "%d", block.nuber);
+			if (block.isOpen && !block.bomb) {
+				int size= GetDrawFormatStringWidthToHandle(hFont, "%d", block.nuber);
+				DrawFormatStringToHandle(posx+size/2, posy, 0x0,hFont, "%d", block.nuber);
 //				DrawFormatString(posx,posy,0x0,"%d",block.nuber);
 			}
 		}
@@ -281,5 +291,30 @@ void Board::OpenAroundEmptyBlock(int index) {
 				OpenAroundEmptyBlock(aroundIndex);
 		}
 	}
+
+}
+
+void Board::CheckGameClear(){
+	std::vector<Block>emptyBlock;
+	emptyBlock.reserve(board.size());
+	for (int i = 0; i < board.size(); i++) {
+		Block block = board.at(i);
+		if (!block.isOpen)
+			continue;
+
+		emptyBlock.emplace_back(block);
+	}
+	emptyBlock.shrink_to_fit();
+
+	auto gameP= GetScene()->Invoke<GameClear>();
+	if (gameP)
+		gameP->SetNum(emptyBlock.size());
+
+
+
+	if ((emptyBlock.size()) != (WIDTH * HEIGHT)- BOMB_MAX-1)
+		return;
+	if(gameP)
+		gameP->SetClear();
 
 }

@@ -73,6 +73,9 @@
     <ClCompile Include="source\object\board.cpp">
       <Filter>4_Objects\GameScene_objects</Filter>
     </ClCompile>
+    <ClCompile Include="source\object\gameClear.cpp">
+      <Filter>4_Objects\GameScene_objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\main\app.h">
@@ -163,6 +166,9 @@
       <Filter>5_Component\Common_component\soundLoad</Filter>
     </ClInclude>
     <ClInclude Include="source\object\board.h">
+      <Filter>4_Objects\GameScene_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\gameClear.h">
       <Filter>4_Objects\GameScene_objects</Filter>
     </ClInclude>
   </ItemGroup>
