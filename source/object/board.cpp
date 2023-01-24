@@ -14,13 +14,14 @@ Board::Board(Scene* sc)
 	:Object(sc)
 	,board()
 	,mouseIndex()
+	,hFont{-1}
 	,firstClick{false}
 	,onBoard{false}
 	,keystop{false}
 {}
 
 Board::~Board(){
-
+	DeleteFontToHandle(hFont);
 }
 
 void Board::Init(){
@@ -28,6 +29,8 @@ void Board::Init(){
 	board.resize(WIDTH * HEIGHT, firstInitValue);
 	keystop = true;
 	firstClick = true;
+	hFont = CreateFontToHandle("",BLOCK_SIZE,-1);
+	assert(hFont > 0);
 	
 	// rand reset to bomb
 	/*for(Block& aBlock:board){
@@ -175,15 +178,20 @@ void Board::Draw() {
 			if (block.bomb && block.isOpen)
 				DrawCircle(posx+BLOCK_SIZE/2,posy+BLOCK_SIZE/2,BLOCK_SIZE/2,0x222222,TRUE);
 #ifdef _DEBUG
-			if(block.bomb && CheckHitKey(KEY_INPUT_D))
+			bool debugKeyD = CheckHitKey(KEY_INPUT_D);
+			if (block.bomb && debugKeyD) 
 				DrawCircle(posx + BLOCK_SIZE / 2, posy + BLOCK_SIZE / 2, BLOCK_SIZE / 2, 0x222222, TRUE);
+			if(debugKeyD)
+				DrawFormatString(posx,posy,0x0,"%d",block.nuber);
 #endif
 	//disp flag
 			if (block.flag)
 				DrawTriangle(posx+BLOCK_SIZE/2,posy,posx,posy+BLOCK_SIZE,posx+BLOCK_SIZE,posy+BLOCK_SIZE,0xffff00,FALSE);
 	// disp bomb count
-			if(block.isOpen)
-			DrawFormatString(posx,posy,0x0,"%d",block.nuber);
+			if (block.isOpen) {
+				DrawFormatStringToHandle(posx, posy, 0x0,hFont, "%d", block.nuber);
+//				DrawFormatString(posx,posy,0x0,"%d",block.nuber);
+			}
 		}
 	}
 }

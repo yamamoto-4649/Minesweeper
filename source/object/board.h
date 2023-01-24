@@ -19,6 +19,7 @@ private:
 
 	std::vector<Block>board;
 	Vec2 mouseIndex;
+	int hFont;
 	bool firstClick;
 	bool onBoard;
 	bool keystop;
