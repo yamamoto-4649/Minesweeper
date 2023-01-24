@@ -10,7 +10,7 @@ namespace {
 	static const int BOARD_X = 100;// first position _ x
 	static const int BOARD_Y = 100;// first position _ y
 	static const int BLOCK_SIZE = 48;// all block size _ width and height
-	static const int BOMB_MAX = 10;// first bomb count
+	static const int BOMB_MAX = 81;// first bomb count
 }
 
 Board::Board(Scene* sc)
@@ -119,32 +119,34 @@ void Board::Update(){
 					OpenAroundEmptyBlock(index);
 				}
 				if (firstClick) {
-				//first delete bomb
-					if(board.at(index).bomb){
-					board.at(index).bomb = false;
-					struct EmptyBlock {
-						Block aBlock;
-						int oldNumber;
-					};
-					std::vector<EmptyBlock>emptyBlock;
+					//first delete bomb
+					if (board.at(index).bomb) {
+						board.at(index).bomb = false;
+						struct EmptyBlock {
+							Block aBlock;
+							int oldNumber;
+						};
+						std::vector<EmptyBlock>emptyBlock;
 
-					emptyBlock.reserve(board.size());
-					for (int i = 0; i < board.size(); i++) {
-						if (board.at(i).bomb)
-							continue;
-						if (i == index)
-							continue;
-						EmptyBlock send;
-						send.aBlock = board.at(i);
-						send.oldNumber = i;
-						emptyBlock.emplace_back(send);
-					}
-					emptyBlock.shrink_to_fit();
-
-					int bombNum = GetRand(emptyBlock.size() - 1);
-					int oldBomb= emptyBlock.at(bombNum).oldNumber;
-					board.at(oldBomb).bomb = true;
-					CountBombAroundBlockAll();
+						emptyBlock.reserve(board.size());
+						for (int i = 0; i < board.size(); i++) {
+							if (board.at(i).bomb)
+								continue;
+							if (i == index)
+								continue;
+							EmptyBlock send;
+							send.aBlock = board.at(i);
+							send.oldNumber = i;
+							emptyBlock.emplace_back(send);
+						}
+						emptyBlock.shrink_to_fit();
+						int oldBomb = index;
+						int bombNum = GetRand(emptyBlock.size() - 1);
+						if(bombNum!=0)
+							oldBomb = emptyBlock.at(bombNum).oldNumber;
+						
+						board.at(oldBomb).bomb = true;
+						CountBombAroundBlockAll();
 					}
 
 
