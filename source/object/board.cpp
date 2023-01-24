@@ -120,7 +120,7 @@ void Board::Update(){
 				}
 				if (firstClick) {
 				//first delete bomb
-					{
+					if(board.at(index).bomb){
 					board.at(index).bomb = false;
 					struct EmptyBlock {
 						Block aBlock;
@@ -299,7 +299,7 @@ void Board::CheckGameClear(){
 	emptyBlock.reserve(board.size());
 	for (int i = 0; i < board.size(); i++) {
 		Block block = board.at(i);
-		if (!block.isOpen)
+		if (block.isOpen)
 			continue;
 
 		emptyBlock.emplace_back(block);
@@ -312,7 +312,7 @@ void Board::CheckGameClear(){
 
 
 
-	if ((emptyBlock.size()) != (WIDTH * HEIGHT)- BOMB_MAX-1)
+	if ((emptyBlock.size()) != BOMB_MAX)
 		return;
 	if(gameP)
 		gameP->SetClear();
