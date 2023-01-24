@@ -1,8 +1,10 @@
 #include "gameClear.h"
 
+#include"../libs/frameWork/scene.h"
+#include"gameOver.h"
+
 GameClear::GameClear(Scene* sc)
 	:Object(sc)
-	,bombNum{0}
 	,winnerCounter{0}
 	,hFont{-1}
 	,frameCounter{0}
@@ -20,6 +22,12 @@ void GameClear::Init(){
 }
 
 void GameClear::Update(){
+	auto gameOver= GetScene()->Invoke<GameOver>();
+	if (gameOver)
+		if (gameOver->GetOver())
+			isClear = false;
+
+
 	if ( !isClear)
 		return;
 
@@ -47,9 +55,6 @@ void GameClear::Update(){
 }
 
 void GameClear::Draw(){
-#ifdef _DEBUG
-	DrawFormatString(64,64,0x0,"%d",bombNum);
-#endif
 
 	if ( !isClear)
 		return;

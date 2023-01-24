@@ -76,6 +76,9 @@
     <ClCompile Include="source\object\gameClear.cpp">
       <Filter>4_Objects\GameScene_objects</Filter>
     </ClCompile>
+    <ClCompile Include="source\object\gameOver.cpp">
+      <Filter>4_Objects\GameScene_objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\main\app.h">
@@ -169,6 +172,9 @@
       <Filter>4_Objects\GameScene_objects</Filter>
     </ClInclude>
     <ClInclude Include="source\object\gameClear.h">
+      <Filter>4_Objects\GameScene_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\gameOver.h">
       <Filter>4_Objects\GameScene_objects</Filter>
     </ClInclude>
   </ItemGroup>

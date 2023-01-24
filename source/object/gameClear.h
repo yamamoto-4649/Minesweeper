@@ -11,9 +11,8 @@ public:
 
 	void SetClear();
 	void ResetClear();
-	void SetNum(int num) { bombNum = num; }
+	bool GetClear() { return isClear; }
 private:
-	int bombNum;
 	int winnerCounter;
 	int hFont;
 	int frameCounter;

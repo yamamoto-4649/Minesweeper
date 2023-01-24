@@ -3,6 +3,7 @@
 #include"../libs/frameWork/scene.h"
 #include<random>
 #include"gameClear.h"
+#include"gameOver.h"
 
 namespace {
 	static const int WIDTH = 9;// is board width _ num x
@@ -74,6 +75,10 @@ void Board::Update(){
 		auto gamecP = GetScene()->Invoke<GameClear>();
 		if (gamecP) {
 			gamecP->ResetClear();
+		}
+		auto gameoP = GetScene()->Invoke<GameOver>();
+		if (gameoP) {
+			gameoP->ResetOver();
 		}
 	}
 #endif
@@ -155,7 +160,7 @@ void Board::Update(){
 					firstClick = false;
 				}
 				
-				
+				CheckGameOver(index);
 			}
 		}
 	}
@@ -308,15 +313,37 @@ void Board::CheckGameClear(){
 	}
 	emptyBlock.shrink_to_fit();
 
-	auto gameP= GetScene()->Invoke<GameClear>();
-	if (gameP)
-		gameP->SetNum(emptyBlock.size());
 
 
 
 	if ((emptyBlock.size()) != BOMB_MAX)
 		return;
-	if(gameP)
-		gameP->SetClear();
+
+	auto gameP= GetScene()->Invoke<GameClear>();
+	if (!gameP)
+		return;
+
+	gameP->SetClear();
+
+}
+
+void Board::CheckGameOver(int index){
+	if (!board.at(index).bomb)
+		return;
+
+
+	auto gameoP = GetScene()->Invoke<GameOver>();
+	if (!gameoP)
+		return;
+
+	auto clear = GetScene()->Invoke<GameClear>();
+	if (!clear)
+		return;
+
+	if (clear->GetClear())
+		return;
+
+	gameoP->SetOver();
+
 
 }

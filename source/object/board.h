@@ -45,4 +45,5 @@ private:
 	void OpenAroundEmptyBlock(int index);
 
 	void CheckGameClear();
+	void CheckGameOver(int index);
 };

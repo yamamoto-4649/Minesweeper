@@ -5,13 +5,17 @@
 #include"../object/gameSceneObject.h"
 #include"../object/board.h"
 #include"../object/gameClear.h"
+#include"../object/gameOver.h"
 
 GameScene::GameScene(){
 	SetBackgroundColor(0xe5,0xff,0xff);
 
+	//https://minesweeperonline.com/#200
+
 	//Create<GameSceneObject>("gameSceneObject");
 	Create<Board>("board");
 	Create<GameClear>("gameClear");
+	Create<GameOver>("gameOver");
 }
 
 GameScene::~GameScene(){
