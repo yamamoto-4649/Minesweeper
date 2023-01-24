@@ -10,7 +10,7 @@ namespace {
 	static const int BOARD_X = 100;// first position _ x
 	static const int BOARD_Y = 100;// first position _ y
 	static const int BLOCK_SIZE = 48;// all block size _ width and height
-	static const int BOMB_MAX = 81;// first bomb count
+	static const int BOMB_MAX = 10;// first bomb count
 }
 
 Board::Board(Scene* sc)

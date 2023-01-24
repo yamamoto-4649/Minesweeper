@@ -10,10 +10,14 @@ public:
 	void Draw()	override;
 
 	void SetClear();
-	void ResetClear() { isClear = false; }
+	void ResetClear();
 	void SetNum(int num) { bombNum = num; }
 private:
-	bool isClear;
 	int bombNum;
+	int winnerCounter;
+	int hFont;
+	int frameCounter;
+	bool isClear;
+	bool dispString;
 
 };
