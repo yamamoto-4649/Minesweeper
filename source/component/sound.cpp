@@ -5,8 +5,8 @@ namespace {
 	std::string folderPass = "data/sound/";
 }
 
-Sound::Sound(Object* obj)
-	:Component(obj)
+Sound::Sound(Scene* sc)
+	:Object(sc)
 	,sounds()
 {
 }
