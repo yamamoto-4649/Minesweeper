@@ -12,7 +12,7 @@ GameScene::GameScene(){
 
 	//Create<GameSceneObject>("gameSceneObject");
 	Create<Board>("Board");
-	Create<FreeCamera>("freeCamera");
+	//Create<FreeCamera>("freeCamera");
 
 }
 

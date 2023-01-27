@@ -25,6 +25,6 @@ private:
 	};
 	
 	std::vector<Block>board;
-	
+
 
 };
