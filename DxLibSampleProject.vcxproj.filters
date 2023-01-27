@@ -58,6 +58,8 @@
     <ClCompile Include="source\component\sound.cpp">
       <Filter>4_Objects\CommonScene_objects</Filter>
     </ClCompile>
+    <ClCompile Include="source\object\board.cpp" />
+    <ClCompile Include="source\object\freeCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\main\app.h">
@@ -138,6 +140,10 @@
     <ClInclude Include="source\component\sound.h">
       <Filter>4_Objects\CommonScene_objects</Filter>
     </ClInclude>
+    <ClInclude Include="source\object\board.h">
+      <Filter>4_Objects\GameScene_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\freeCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="3_Scenes">

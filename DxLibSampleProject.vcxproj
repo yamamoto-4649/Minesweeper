@@ -24,7 +24,9 @@
     <ClCompile Include="source\libs\frameWork\scenemanager.cpp" />
     <ClCompile Include="source\main\app.cpp" />
     <ClCompile Include="source\main\winmain.cpp" />
+    <ClCompile Include="source\object\board.cpp" />
     <ClCompile Include="source\object\bootTestObject.cpp" />
+    <ClCompile Include="source\object\freeCamera.cpp" />
     <ClCompile Include="source\object\gameSceneObject.cpp" />
     <ClCompile Include="source\object\titleobject.cpp" />
     <ClCompile Include="source\scene\bootScene.cpp" />
@@ -53,8 +55,10 @@
     <ClInclude Include="source\main\app.h" />
     <ClInclude Include="source\main\config.h" />
     <ClInclude Include="source\object\bootTestObject.h" />
+    <ClInclude Include="source\object\freeCamera.h" />
     <ClInclude Include="source\object\titleobject.h" />
     <ClInclude Include="source\object\gameSceneObject.h" />
+    <ClInclude Include="source\object\board.h" />
     <ClInclude Include="source\scene\bootScene.h" />
     <ClInclude Include="source\scene\gamescene.h" />
     <ClInclude Include="source\scene\titlescene.h" />
