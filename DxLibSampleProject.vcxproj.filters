@@ -56,7 +56,7 @@
       <Filter>2_libs\commons\fpsController</Filter>
     </ClCompile>
     <ClCompile Include="source\component\sound.cpp">
-      <Filter>5_Component\Common_component\soundLoad</Filter>
+      <Filter>4_Objects\CommonScene_objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,7 +136,7 @@
       <Filter>2_libs\commons</Filter>
     </ClInclude>
     <ClInclude Include="source\component\sound.h">
-      <Filter>5_Component\Common_component\soundLoad</Filter>
+      <Filter>4_Objects\CommonScene_objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -187,18 +187,6 @@
     </Filter>
     <Filter Include="4_Objects\TestObject">
       <UniqueIdentifier>{7f56394e-989a-40bd-98e8-db76b50e689a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="5_Component">
-      <UniqueIdentifier>{1b831619-87c8-42d6-9acc-7902bc798226}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="5_Component\Title_component">
-      <UniqueIdentifier>{cde4bba9-9bd9-4e3f-84c3-04e55b535a97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="5_Component\Common_component">
-      <UniqueIdentifier>{04a44ea5-e027-4b35-a016-9df684d3c37a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="5_Component\Common_component\soundLoad">
-      <UniqueIdentifier>{bfe1f814-bc17-4550-b4ab-3f2fff54d61b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
