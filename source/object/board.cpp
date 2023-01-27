@@ -170,6 +170,8 @@ void Board::Update(){
 }
 
 void Board::Draw() {
+	auto overP = GetScene()->Invoke<GameOver>();
+
 
 	// disp blocks
 	for (int y = 0; y < HEIGHT; y++) {
@@ -193,6 +195,11 @@ void Board::Draw() {
 	// disp bomb
 			if (block.bomb && block.isOpen)
 				DrawCircle(posx+BLOCK_SIZE/2,posy+BLOCK_SIZE/2,BLOCK_SIZE/2,0x222222,TRUE);
+
+			if(overP){
+				if (block.bomb && overP->GetOver())
+					DrawCircle(posx + BLOCK_SIZE / 2, posy + BLOCK_SIZE / 2, BLOCK_SIZE / 2, 0x222222, TRUE);
+			}
 #ifdef _DEBUG
 			bool debugKeyD = CheckHitKey(KEY_INPUT_D);
 			if (block.bomb && debugKeyD) 
