@@ -11,10 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\component\gameEase.cpp" />
     <ClCompile Include="source\component\sound.cpp" />
-    <ClCompile Include="source\component\titleName.cpp" />
-    <ClCompile Include="source\component\titleSceneChange.cpp" />
     <ClCompile Include="source\libs\common\csvReader.cpp" />
     <ClCompile Include="source\libs\common\easeing.cpp" />
     <ClCompile Include="source\libs\common\fpstimer.cpp" />
@@ -22,7 +19,6 @@
     <ClCompile Include="source\libs\common\keyManager.cpp" />
     <ClCompile Include="source\libs\common\oneCharacterSpacing.cpp" />
     <ClCompile Include="source\libs\common\save.cpp" />
-    <ClCompile Include="source\libs\frameWork\object.cpp" />
     <ClCompile Include="source\libs\frameWork\scene.cpp" />
     <ClCompile Include="source\libs\frameWork\scenechanger.cpp" />
     <ClCompile Include="source\libs\frameWork\scenemanager.cpp" />
@@ -37,9 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\component\sound.h" />
-    <ClInclude Include="source\component\titleName.h" />
-    <ClInclude Include="source\component\titleSceneChange.h" />
-    <ClInclude Include="source\component\gameEase.h" />
     <ClInclude Include="source\libs\common\button.h" />
     <ClInclude Include="source\libs\common\colorhsv.h" />
     <ClInclude Include="source\libs\common\csvReader.h" />

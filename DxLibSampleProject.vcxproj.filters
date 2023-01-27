@@ -16,20 +16,11 @@
     <ClCompile Include="source\scene\bootScene.cpp">
       <Filter>3_Scenes\TestScenes</Filter>
     </ClCompile>
-    <ClCompile Include="source\component\titleName.cpp">
-      <Filter>5_Component\Title_component</Filter>
-    </ClCompile>
-    <ClCompile Include="source\component\titleSceneChange.cpp">
-      <Filter>5_Component\Title_component</Filter>
-    </ClCompile>
     <ClCompile Include="source\object\bootTestObject.cpp">
       <Filter>4_Objects\TestObject</Filter>
     </ClCompile>
     <ClCompile Include="source\object\titleobject.cpp">
       <Filter>4_Objects\TitleScene_Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="source\libs\frameWork\object.cpp">
-      <Filter>2_libs\frameWorks</Filter>
     </ClCompile>
     <ClCompile Include="source\libs\frameWork\scene.cpp">
       <Filter>2_libs\frameWorks</Filter>
@@ -58,9 +49,6 @@
     <ClCompile Include="source\object\gameSceneObject.cpp">
       <Filter>4_Objects\GameScene_objects</Filter>
     </ClCompile>
-    <ClCompile Include="source\component\gameEase.cpp">
-      <Filter>5_Component\Game_component</Filter>
-    </ClCompile>
     <ClCompile Include="source\libs\common\easeing.cpp">
       <Filter>2_libs\commons</Filter>
     </ClCompile>
@@ -86,12 +74,6 @@
     </ClInclude>
     <ClInclude Include="source\scene\bootScene.h">
       <Filter>3_Scenes\TestScenes</Filter>
-    </ClInclude>
-    <ClInclude Include="source\component\titleName.h">
-      <Filter>5_Component\Title_component</Filter>
-    </ClInclude>
-    <ClInclude Include="source\component\titleSceneChange.h">
-      <Filter>5_Component\Title_component</Filter>
     </ClInclude>
     <ClInclude Include="source\object\bootTestObject.h">
       <Filter>4_Objects\TestObject</Filter>
@@ -140,9 +122,6 @@
     </ClInclude>
     <ClInclude Include="source\object\gameSceneObject.h">
       <Filter>4_Objects\GameScene_objects</Filter>
-    </ClInclude>
-    <ClInclude Include="source\component\gameEase.h">
-      <Filter>5_Component\Game_component</Filter>
     </ClInclude>
     <ClInclude Include="source\libs\common\easeing.h">
       <Filter>2_libs\commons</Filter>
@@ -214,9 +193,6 @@
     </Filter>
     <Filter Include="5_Component\Title_component">
       <UniqueIdentifier>{cde4bba9-9bd9-4e3f-84c3-04e55b535a97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="5_Component\Game_component">
-      <UniqueIdentifier>{3fab075f-8c15-45d3-ae94-fc8f13b98cfa}</UniqueIdentifier>
     </Filter>
     <Filter Include="5_Component\Common_component">
       <UniqueIdentifier>{04a44ea5-e027-4b35-a016-9df684d3c37a}</UniqueIdentifier>

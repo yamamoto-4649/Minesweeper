@@ -5,9 +5,9 @@ class TitleObject :public Object {
 public:
 	TitleObject(Scene* sc)	;
 	~TitleObject()	override;
-	void Init()		override { Object::Init(); }
-	void Update()	override { Object::Update(); }
-	void Draw()		override { Object::Draw(); }
+	void Init()		override ;
+	void Update()	override ;
+	void Draw()		override ;
 
 	/// <summary>
 	/// I—¹‚·‚éƒL[‚ğ‰Ÿ‚µ‚½‚©
@@ -18,4 +18,7 @@ public:
 	bool EndKeyInput()		;
 
 private:
+	int hFont;
+	bool keystop;
+	bool mouseInput;
 };
